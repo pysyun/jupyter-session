@@ -20,20 +20,11 @@ execute() {
         # wait
 }
 
-if [[ $# -ne 0 ]]; then
-    if ! ( echo "$2" | grep -E -q '^?[0-9]+$' ); then
-        echo "The first parameter specifies the period instead of the file location path"
-    else
+if [[ $# -eq 2 ]]; then
+    serch='^[A-Za-z0-9\/.*"]+$' 
+    if [[ $1 =~ $serch ]] && ( echo "$2" | grep -E -q '^?[0-9]+$' ); then
         execute "$1" "$2"
     fi
-elif [[ $# -eq 1 ]];then
-    if ! ( echo "$1" | grep -E -q '^?[0-9]+$' ); then
-        echo "No period specified."
-    else
-        echo "The first parameter is only the time"
-    fi
-elif (( $# > 2 ));then
-    echo "Front excess number of variables"
 else
-    echo 'Usage: jupyter-session-folder {folder}'
+    echo 'Usage: jupyter-session-folder {folder period}'
 fi

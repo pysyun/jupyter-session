@@ -11,7 +11,8 @@ execute() {
             if ls $file | cut -f 2 | grep -q $format; then
                result=$(( (`date +%s`) - (`date +%s -r "$file"`) ))
                if (( $result > $period )); then 
-               jupyter nbconvert --inplace --execute $file 
+               jupyter nbconvert --inplace --execute $file
+               fi
             fi
         done
 

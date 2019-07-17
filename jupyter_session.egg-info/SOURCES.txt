@@ -1,9 +1,0 @@
-README.md
-setup.py
-jupyter/__init__.py
-jupyter/session.py
-jupyter_session.egg-info/PKG-INFO
-jupyter_session.egg-info/SOURCES.txt
-jupyter_session.egg-info/dependency_links.txt
-jupyter_session.egg-info/top_level.txt
-script/jupyter-session-folder.sh

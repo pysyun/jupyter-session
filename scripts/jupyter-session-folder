@@ -30,7 +30,7 @@ elif [[ $# -eq 1 ]];then
     if ! ( echo "$1" | grep -E -q '^?[0-9]+$' ); then
         echo "No period specified."
     else
-        echo "The first parameter is not the path."
+        echo "The first parameter is only the time"
     fi
 elif (( $# > 2 ));then
     echo "Front excess number of variables"

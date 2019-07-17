@@ -9,5 +9,5 @@ setup (
    author_email = 'pysyun@vitche.com',
    py_modules = ['jupyter.session'],
    install_requires = [],
-   url='https://github.com/ChoNakyun/jupyter-session'
+   url='https://github.com/pysyun/jupyter-session/blob/master/setup.py'
 )

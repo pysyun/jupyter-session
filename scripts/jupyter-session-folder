@@ -3,12 +3,15 @@
 execute() {
 
     path="$1"
+    period="$2"
     format="ipynb"
 
     for file in $path
         do
             if ls $file | cut -f 2 | grep -q $format; then
-                jupyter nbconvert --inplace --execute $file 
+               result=$(( (`date +%s`) - (`date +%s -r "$file"`) ))
+               if (( $result > $period )); then 
+               jupyter nbconvert --inplace --execute $file 
             fi
         done
 
@@ -17,7 +20,19 @@ execute() {
 }
 
 if [[ $# -ne 0 ]]; then
-    execute "$1"
+    if ! ( echo "$2" | grep -E -q '^?[0-9]+$' ); then
+        echo "The first parameter specifies the period instead of the file location path"
+    else
+        execute "$1" "$2"
+    fi
+elif [[ $# -eq 1 ]];then
+    if ! ( echo "$1" | grep -E -q '^?[0-9]+$' ); then
+        echo "No period specified."
+    else
+        echo "The first parameter is not the path."
+    fi
+elif (( $# > 2 ));then
+    echo "Front excess number of variables"
 else
     echo 'Usage: jupyter-session-folder.sh {folder}'
 fi

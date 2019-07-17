@@ -26,5 +26,5 @@ if [[ $# -eq 2 ]]; then
         execute "$1" "$2"
     fi
 else
-    echo 'Usage: jupyter-session-folder {folder period}'
+    echo 'Usage: jupyter-session-folder {"folder" period}'
 fi

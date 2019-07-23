@@ -1,0 +1,33 @@
+#!/bin/bash#!/bin/bash
+
+execute() {
+
+    path="$1"
+    period="$2"
+    format="ipynb"
+
+    for file in $path
+        do
+            if ls $file | cut -f 2 | grep -q $format; then
+               result=$(( (`date +%s`) - (`date +%s -r "$file"`) ))
+               if (( $result > $period )); then 
+                   jupyter nbconvert --inplace --execute $file
+               fi
+            fi
+        done
+
+        # To execute notebooks in parallel
+        # wait
+}
+
+if [[ $# -eq 2 ]]; then
+    serchpath='(^[-_A-Za-z0-9\/.*]*\/)(\*\.\*)$' 
+    serchperiod='^[0-9]+$' 
+    if [[ $1 =~ $serchpath ]] && [[ $2 =~ $serchperiod ]]; then
+        execute "$1" "$2"
+    else
+        echo 'Usage: jupyter-session-folder {"/../folder/*.*" period}'
+    fi
+else
+    echo 'Usage: jupyter-session-folder {"/../folder/*.*" period}'
+fi

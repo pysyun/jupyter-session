@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash#!/bin/bash
 
 execute() {
 
@@ -21,10 +21,13 @@ execute() {
 }
 
 if [[ $# -eq 2 ]]; then
-    serch='^[A-Za-z0-9\/.*"]+$' 
-    if [[ $1 =~ $serch ]] && ( echo "$2" | grep -E -q '^?[0-9]+$' ); then
+    serchpath='(^[-_A-Za-z0-9\/.*]*\/)(\*\.\*)$' 
+    serchperiod='^[0-9]+$' 
+    if [[ $1 =~ $serchpath ]] && [[ $2 =~ $serchperiod ]]; then
         execute "$1" "$2"
+    else
+        echo 'Usage: jupyter-session-folder {"/../folder/*.*" period}'
     fi
 else
-    echo 'Usage: jupyter-session-folder {"folder" period}'
+    echo 'Usage: jupyter-session-folder {"/../folder/*.*" period}'
 fi
